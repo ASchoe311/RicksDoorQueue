@@ -26,6 +26,7 @@ function respond() {
       else{
         switch (msgArr[i]) {
           case "sunday":
+            console.log("sunday chosen")
             responseText += "Queue to have Sunday taken:\n"
             for(var i = 0; i < sunday.length; i++){
               responseText += "Position "
