@@ -227,6 +227,7 @@ function respond() {
             }
             break;
           default:
+            responseText += "that's not a day of the week dumbass"
             break;
         }
         console.log(responseText)
