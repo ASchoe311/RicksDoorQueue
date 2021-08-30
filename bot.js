@@ -1,7 +1,7 @@
 var HTTPS = require('https');
 var cool = require('cool-ascii-faces');
 
-var botID = process.env.BOT_ID;
+var botID = "3964152c789e251f4a7d5c864b";
 
 var sunday = []
 var monday = []
