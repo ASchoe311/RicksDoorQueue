@@ -21,47 +21,47 @@ function respond() {
       console.log(request.text)
       console.log(request.name)
       var sender = request.name
-      responseText.concat(sender)
-      responseText.concat(" placed in the queue for")
+      responseText += sender
+      responseText += " placed in the queue for"
       console.log(responseText)
       for(var i=1;i < msgArr.length;i++){
-        if(i > 1) responseText.concat(",")
-        if(i == msgArr.length - 1) responseText.concat(" and")
+        if(i > 1) responseText += ","
+        if(i == msgArr.length - 1) responseText += " and"
         switch (msgArr[i]) {
           case "sunday":
-            responseText.concat(" Sunday at position ")
+            responseText += " Sunday at position "
             sunday.push(sender)
-            responseText.concat(sunday.length)
+            responseText += sunday.length
             break;
           case "monday":
-            responseText.concat(" Monday at position ")
+            responseText += " Monday at position "
             monday.push(sender)
-            responseText.concat(monday.length)
+            responseText += monday.length
             break;
           case "tuesday":
-            responseText.concat(" Tuesday at position ")
+            responseText += " Tuesday at position "
             tuesday.push(sender)
-            responseText.concat(tuesday.length)
+            responseText += tuesday.length
             break;
           case "wednesday":
-            responseText.concat(" Wednesday at position ")
+            responseText += " Wednesday at position "
             wednesday.push(sender)
-            responseText.concat(wednesday.length)
+            responseText += wednesday.length
             break;
           case "thursday":
-            responseText.concat(" Thursday at position ")
+            responseText += " Thursday at position "
             thursday.push(sender)
-            responseText.concat(thursday.length)
+            responseText += thursday.length
             break;
           case "friday":
-            responseText.concat(" Friday at position ")
+            responseText += " Friday at position "
             friday.push(sender)
-            responseText.concat(friday.length)
+            responseText += friday.length
             break;
           case "saturday":
-            responseText.concat(" Friday at position ")
+            responseText += " Friday at position "
             friday.push(sender)
-            responseText.concat(friday.length)
+            responseText += friday.length
             break;
           default:
             break;
