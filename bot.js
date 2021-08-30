@@ -98,19 +98,16 @@ function respond() {
           default:
             break;
         }
+        console.log(responseText)
         this.res.writeHead(200);
         postMessage(responseText);
         this.res.end();
       }
     }
     else if(msgArr[0] == "/queue"){
-      console.log("Detected queue request")
-      console.log(request.text)
-      console.log(request.name)
       var sender = request.name
       responseText += sender
       responseText += " placed in the queue for"
-      console.log(responseText)
       for(var i=1;i < msgArr.length;i++){
         if(i > 3) responseText += ","
         if(i == msgArr.length - 1 && msgArr.length != 2) responseText += " and"
@@ -154,7 +151,6 @@ function respond() {
             break;
         }
       }
-      console.log("Sending response: ")
       console.log(responseText)
       this.res.writeHead(200);
       postMessage(responseText);
