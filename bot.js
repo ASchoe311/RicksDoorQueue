@@ -17,9 +17,13 @@ function respond() {
   if (request.text) {
     var msgArr = request.text.toLowerCase().split(" ")
     if(msgArr[0] == "/queue"){
+      console.log("Detected queue request")
+      console.log(request.text)
+      console.log(request.name)
       var sender = request.name
       responseText.concat(sender)
       responseText.concat(" placed in the queue for")
+      console.log(responseText)
       for(var i=1;i < msgArr.length;i++){
         if(i > 1) responseText.concat(",")
         if(i == msgArr.length - 1) responseText.concat(" and")
