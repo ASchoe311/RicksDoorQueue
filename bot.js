@@ -27,6 +27,10 @@ function respond() {
         switch (msgArr[i]) {
           case "sunday":
             console.log("sunday chosen")
+            if(sunday.length == 0){
+              responseText = "The queue for Sunday is empty"
+              break;
+            }
             responseText += "Queue to have Sunday taken:\n"
             for(var i = 0; i < sunday.length; i++){
               responseText += "Position "
@@ -37,6 +41,10 @@ function respond() {
             }
             break;
           case "monday":
+            if(monday.length == 0){
+              responseText = "The queue for Monday is empty"
+              break;
+            }
             responseText += "Queue to have Monday taken:\n"
             for(var i = 0; i < monday.length; i++){
               responseText += "Position "
@@ -47,6 +55,10 @@ function respond() {
             }
             break;
           case "tuesday":
+            if(tuesday.length == 0){
+              responseText = "The queue for Tuesday is empty"
+              break;
+            }
             responseText += "Queue to have Tuesday taken:\n"
             for(var i = 0; i < tuesday.length; i++){
               responseText += "Position "
@@ -57,6 +69,10 @@ function respond() {
             }
             break;
           case "wednesday":
+            if(wednesday.length == 0){
+              responseText = "The queue for Wednesday is empty"
+              break;
+            }
             responseText += "Queue to have Wednesday taken:\n"
             for(var i = 0; i < wednesday.length; i++){
               responseText += "Position "
@@ -67,6 +83,10 @@ function respond() {
             }
             break;
           case "thursday":
+            if(thursday.length == 0){
+              responseText = "The queue for Thursday is empty"
+              break;
+            }
             responseText += "Queue to have Thursday taken:\n"
             for(var i = 0; i < thursday.length; i++){
               responseText += "Position "
@@ -77,6 +97,10 @@ function respond() {
             }
             break;
           case "friday":
+            if(friday.length == 0){
+              responseText = "The queue for Friday is empty"
+              break;
+            }
             responseText += "Queue to have Friday taken:\n"
             for(var i = 0; i < friday.length; i++){
               responseText += "Position "
@@ -87,6 +111,10 @@ function respond() {
             }
             break;
           case "saturday":
+            if(saturday.length == 0){
+              responseText = "The queue for Saturday is empty"
+              break;
+            }
             responseText += "Queue to have Saturday taken:\n"
             for(var i = 0; i < saturday.length; i++){
               responseText += "Position "
