@@ -16,7 +16,94 @@ function respond() {
   var responseText = ""
   if (request.text) {
     var msgArr = request.text.toLowerCase().split(" ")
-    if(msgArr[0] == "/queue"){
+    if(msgArr[0] == "/queuecheck"){
+      if(msgArr.length == 1){
+        responseText = "Must input a specific day of the week to check the queue"
+        this.res.writeHead(200);
+        postMessage(responseText);
+        this.res.end();
+      }
+      else{
+        switch (msgArr[i]) {
+          case "sunday":
+            responseText += "Queue to have Sunday taken:\n"
+            for(var i = 0; i < sunday.length; i++){
+              responseText += "Position "
+              responseText += (i + 1)
+              responseText += " is "
+              responseText += sunday[i]
+              responseText += "\n"
+            }
+            break;
+          case "monday":
+            responseText += "Queue to have Monday taken:\n"
+            for(var i = 0; i < monday.length; i++){
+              responseText += "Position "
+              responseText += (i + 1)
+              responseText += " is "
+              responseText += monday[i]
+              responseText += "\n"
+            }
+            break;
+          case "tuesday":
+            responseText += "Queue to have Tuesday taken:\n"
+            for(var i = 0; i < tuesday.length; i++){
+              responseText += "Position "
+              responseText += (i + 1)
+              responseText += " is "
+              responseText += tuesday[i]
+              responseText += "\n"
+            }
+            break;
+          case "wednesday":
+            responseText += "Queue to have Wednesday taken:\n"
+            for(var i = 0; i < wednesday.length; i++){
+              responseText += "Position "
+              responseText += (i + 1)
+              responseText += " is "
+              responseText += wednesday[i]
+              responseText += "\n"
+            }
+            break;
+          case "thursday":
+            responseText += "Queue to have Thursday taken:\n"
+            for(var i = 0; i < thursday.length; i++){
+              responseText += "Position "
+              responseText += (i + 1)
+              responseText += " is "
+              responseText += thursday[i]
+              responseText += "\n"
+            }
+            break;
+          case "friday":
+            responseText += "Queue to have Friday taken:\n"
+            for(var i = 0; i < friday.length; i++){
+              responseText += "Position "
+              responseText += (i + 1)
+              responseText += " is "
+              responseText += friday[i]
+              responseText += "\n"
+            }
+            break;
+          case "saturday":
+            responseText += "Queue to have Saturday taken:\n"
+            for(var i = 0; i < saturday.length; i++){
+              responseText += "Position "
+              responseText += (i + 1)
+              responseText += " is "
+              responseText += saturday[i]
+              responseText += "\n"
+            }
+            break;
+          default:
+            break;
+        }
+        this.res.writeHead(200);
+        postMessage(responseText);
+        this.res.end();
+      }
+    }
+    else if(msgArr[0] == "/queue"){
       console.log("Detected queue request")
       console.log(request.text)
       console.log(request.name)
@@ -59,9 +146,9 @@ function respond() {
             responseText += friday.length
             break;
           case "saturday":
-            responseText += " Friday at position "
-            friday.push(sender)
-            responseText += friday.length
+            responseText += " Saturday at position "
+            saturday.push(sender)
+            responseText += saturday.length
             break;
           default:
             break;
