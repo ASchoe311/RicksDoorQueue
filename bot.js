@@ -63,7 +63,8 @@ function respond() {
             break;
         }
       }
-      console.log("Sending response")
+      console.log("Sending response: ")
+      console.log(responseText)
       this.res.writeHead(200);
       postMessage(responseText);
       this.res.end();
