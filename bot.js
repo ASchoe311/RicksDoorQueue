@@ -24,9 +24,8 @@ function respond() {
         this.res.end();
       }
       else{
-        switch (msgArr[i]) {
+        switch (msgArr[1]) {
           case "sunday":
-            console.log("sunday chosen")
             if(sunday.length == 0){
               responseText = "The queue for Sunday is empty"
               break;
@@ -138,7 +137,7 @@ function respond() {
       responseText += sender
       responseText += " placed in the queue for"
       for(var i=1;i < msgArr.length;i++){
-        if(i > 3) responseText += ","
+        if(msgArr.length > 2) responseText += ","
         if(i == msgArr.length - 1 && msgArr.length != 2) responseText += " and"
         switch (msgArr[i]) {
           case "sunday":
