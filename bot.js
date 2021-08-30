@@ -113,6 +113,9 @@ function respond() {
               responseText += " removed from Saturday queue"
             }
             break;
+          default:
+            responseText += "that's not a day of the week dumbass"
+            break;
         }
       }
       this.res.writeHead(200);
@@ -280,6 +283,7 @@ function respond() {
             responseText += saturday.length
             break;
           default:
+            responseText += "that's not a day of the week dumbass"
             break;
         }
       }
