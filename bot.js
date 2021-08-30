@@ -16,6 +16,109 @@ function respond() {
   var responseText = ""
   if (request.text) {
     var msgArr = request.text.toLowerCase().split(" ")
+    if(msgArr[0] == "/unqueue"){
+      if(msgArr.length == 1){
+        responseText = "Must input a specific day of the week to remove yourself from the queue"
+      }
+      else{
+        switch(msgArr[1]){
+          case "sunday":
+            queueLocation = sunday.indexOf(request.name)
+            if(queueLocation == -1){
+              responseText += request.name
+              responseText += " was not found in the queue for Sunday"
+              break;
+            }
+            else{
+              sunday.splice(queueLocation, 1)
+              responseText += request.name
+              responseText += " removed from Sunday queue"
+            }
+            break;
+          case "monday":
+            queueLocation = monday.indexOf(request.name)
+            if(queueLocation == -1){
+              responseText += request.name
+              responseText += " was not found in the queue for Monday"
+              break;
+            }
+            else{
+              monday.splice(queueLocation, 1)
+              responseText += request.name
+              responseText += " removed from Monday queue"
+            }
+            break;
+          case "tuesday":
+            queueLocation = tuesday.indexOf(request.name)
+            if(queueLocation == -1){
+              responseText += request.name
+              responseText += " was not found in the queue for Tuesday"
+              break;
+            }
+            else{
+              tuesday.splice(queueLocation, 1)
+              responseText += request.name
+              responseText += " removed from Tuesday queue"
+            }
+            break;
+          case "wednesday":
+            queueLocation = wednesday.indexOf(request.name)
+            if(queueLocation == -1){
+              responseText += request.name
+              responseText += " was not found in the queue for Wednesday"
+              break;
+            }
+            else{
+              wednesday.splice(queueLocation, 1)
+              responseText += request.name
+              responseText += " removed from Wednesday queue"
+            }
+            break;
+          case "thursday":
+            queueLocation = thursday.indexOf(request.name)
+            if(queueLocation == -1){
+              responseText += request.name
+              responseText += " was not found in the queue for Thursday"
+              break;
+            }
+            else{
+              thursday.splice(queueLocation, 1)
+              responseText += request.name
+              responseText += " removed from Thursday queue"
+            }
+            break;
+          case "friday":
+            queueLocation = friday.indexOf(request.name)
+            if(queueLocation == -1){
+              responseText += request.name
+              responseText += " was not found in the queue for Friday"
+              break;
+            }
+            else{
+              friday.splice(queueLocation, 1)
+              responseText += request.name
+              responseText += " removed from Friday queue"
+            }
+            break;
+          case "saturday":
+            queueLocation = saturday.indexOf(request.name)
+            if(queueLocation == -1){
+              responseText += request.name
+              responseText += " was not found in the queue for Saturday"
+              break;
+            }
+            else{
+              saturday.splice(queueLocation, 1)
+              responseText += request.name
+              responseText += " removed from Saturday queue"
+            }
+            break;
+        }
+      }
+      this.res.writeHead(200);
+      postMessage(responseText);
+      this.res.end();
+    }
     if(msgArr[0] == "/queuecheck"){
       if(msgArr.length == 1){
         responseText = "Must input a specific day of the week to check the queue"
@@ -137,7 +240,7 @@ function respond() {
       responseText += sender
       responseText += " placed in the queue for"
       for(var i=1;i < msgArr.length;i++){
-        if(msgArr.length > 2) responseText += ","
+        if(msgArr.length > 2 && i != 1) responseText += ","
         if(i == msgArr.length - 1 && msgArr.length != 2) responseText += " and"
         switch (msgArr[i]) {
           case "sunday":
@@ -179,7 +282,6 @@ function respond() {
             break;
         }
       }
-      console.log(responseText)
       this.res.writeHead(200);
       postMessage(responseText);
       this.res.end();
