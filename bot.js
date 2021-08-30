@@ -25,8 +25,8 @@ function respond() {
       responseText += " placed in the queue for"
       console.log(responseText)
       for(var i=1;i < msgArr.length;i++){
-        if(i > 1) responseText += ","
-        if(i == msgArr.length - 1) responseText += " and"
+        if(i > 3) responseText += ","
+        if(i == msgArr.length - 1 && msgArr.length != 2) responseText += " and"
         switch (msgArr[i]) {
           case "sunday":
             responseText += " Sunday at position "
