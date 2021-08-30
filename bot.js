@@ -6,8 +6,8 @@ var botID = process.env.BOT_ID;
 function respond() {
   var request = JSON.parse(this.req.chunks[0]),
       botRegex = /^\/queue$/;
-  for (let index = 0; index < this.req.chunks.length; index++) {
-    console.log(JSON.parse(this.req.chunks[index]))
+  for (index in this.req.chunks){
+    console.log(index)
   }
   //console.log(JSON.stringify(this.req))
   // if(request.text && botRegex.test(request.text)) {
