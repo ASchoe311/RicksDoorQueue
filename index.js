@@ -13,6 +13,7 @@ router = new director.http.Router({
 });
 
 server = http.createServer(function (req, res) {
+  console.log(JSON.stringify(req))
   req.chunks = [];
   req.on('data', function (chunk) {
     req.chunks.push(chunk.toString());
