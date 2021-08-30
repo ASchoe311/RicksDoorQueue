@@ -5,20 +5,20 @@ var botID = process.env.BOT_ID;
 
 function respond() {
   var request = JSON.parse(this.req.chunks[0]),
-      botRegex = /^\/queue$/;
-  for (index in this.req.chunks){
-    console.log(JSON.stringify(index))
-  }
-  //console.log(JSON.stringify(this.req))
-  // if(request.text && botRegex.test(request.text)) {
-  //   this.res.writeHead(200);
-  //   postMessage();
-  //   this.res.end();
-  // } else {
-  //   console.log("don't care");
-  //   this.res.writeHead(200);
-  //   this.res.end();
+      botRegex = /^\/cool guy$/;
+  // for (index in this.req.chunks){
+  //   console.log(JSON.stringify(index))
   // }
+  // console.log(JSON.stringify(this.req))
+  if(request.text && botRegex.test(request.text)) {
+    this.res.writeHead(200);
+    postMessage();
+    this.res.end();
+  } else {
+    console.log("don't care");
+    this.res.writeHead(200);
+    this.res.end();
+  }
 }
 
 function postMessage() {
