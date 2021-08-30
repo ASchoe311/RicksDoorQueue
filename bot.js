@@ -20,7 +20,7 @@ function respond() {
       var sender = request.name
       responseText.concat(sender)
       responseText.concat(" placed in the queue for")
-      for(let i=1;i < msgArr.length;i++){
+      for(var i=1;i < msgArr.length;i++){
         if(i > 1) responseText.concat(",")
         if(i == msgArr.length - 1) responseText.concat(" and")
         switch (msgArr[i]) {
