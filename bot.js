@@ -17,7 +17,7 @@ function respond() {
   if (request.text) {
     var msgArr = request.text.toLowerCase().split(" ")
     if(msgArr[0] == "/queue"){
-      let sender = request.name
+      var sender = request.name
       responseText.concat(sender)
       responseText.concat(" placed in the queue for")
       for(let i=1;i < msgArr.length;i++){
