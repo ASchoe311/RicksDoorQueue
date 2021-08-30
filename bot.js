@@ -7,7 +7,7 @@ function respond() {
   var request = JSON.parse(this.req.chunks[0]),
       botRegex = /^\/queue$/;
   for (index in this.req.chunks){
-    console.log(index)
+    console.log(JSON.stringify(index))
   }
   //console.log(JSON.stringify(this.req))
   // if(request.text && botRegex.test(request.text)) {
