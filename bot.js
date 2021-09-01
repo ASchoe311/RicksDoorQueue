@@ -1,6 +1,4 @@
 var HTTPS = require('https');
-var cool = require('cool-ascii-faces');
-
 var botID = "bee00e962e7dd0d8fbc79f9f03";
 
 var sunday = []
@@ -11,7 +9,37 @@ var thursday = []
 var friday = []
 var saturday = []
 
+function clearQueue() {
+  while(!sunday.length > 0){
+    sunday.pop()
+  }
+  while(!monday.length > 0){
+    monday.pop()
+  }
+  while(!tuesday.length > 0){
+    tuesday.pop()
+  }
+  while(!wednesday.length > 0){
+    wednesday.pop()
+  }
+  while(!thursday.length > 0){
+    thursday.pop()
+  }
+  while(!friday.length > 0){
+    friday.pop()
+  }
+  while(!saturday.length > 0){
+    saturday.pop()
+  }
+  console.log("Queues cleared")
+  this.res.writeHead(200)
+  postMessage("Queues cleared for new week")
+  this.res.end()
+}
+
 function respond() {
+  var D = new Date()
+  if(D.getDay == 1) clearQueue()
   var request = JSON.parse(this.req.chunks[0])
   var responseText = ""
   if (request.text) {
@@ -122,7 +150,7 @@ function respond() {
       postMessage(responseText);
       this.res.end();
     }
-    if(msgArr[0] == "/queuecheck"){
+    else if(msgArr[0] == "/queuecheck"){
       if(msgArr.length == 1){
         responseText = "Must input a specific day of the week to check the queue"
         this.res.writeHead(200);
