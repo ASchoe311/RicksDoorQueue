@@ -1,6 +1,12 @@
 var HTTPS = require('https');
 var botID = "bee00e962e7dd0d8fbc79f9f03";
 
+const aws = require('aws-sdk')
+const S3_BUCKET = process.env.S3_BUCKET
+aws.config.region = 'us-east-2';
+
+const maintenanceMode = 1
+
 var sunday = []
 var monday = []
 var tuesday = []
@@ -45,7 +51,10 @@ function respond() {
   if (request.text) {
     var msgArr = request.text.toLowerCase().split(" ")
     if(msgArr[0] == "/unqueue"){
-      if(msgArr.length == 1){
+      if(maintenanceMode == 1){
+        responseText = "My creator put me in maintenance mode until I stop forgetting the queue every day"
+      }
+      else if(msgArr.length == 1){
         responseText = "Must input a specific day of the week to remove yourself from the queue"
       }
       else{
@@ -151,11 +160,11 @@ function respond() {
       this.res.end();
     }
     else if(msgArr[0] == "/queuecheck"){
-      if(msgArr.length == 1){
+      if(maintenanceMode == 1){
+        responseText = "My creator put me in maintenance mode until I stop forgetting the queue every day"
+      }
+      else if(msgArr.length == 1){
         responseText = "Must input a specific day of the week to check the queue"
-        this.res.writeHead(200);
-        postMessage(responseText);
-        this.res.end();
       }
       else{
         switch (msgArr[1]) {
@@ -261,64 +270,76 @@ function respond() {
             responseText += "that's not a day of the week dumbass"
             break;
         }
-        console.log(responseText)
-        this.res.writeHead(200);
-        postMessage(responseText);
-        this.res.end();
       }
+      console.log(responseText)
+      this.res.writeHead(200);
+      postMessage(responseText);
+      this.res.end();
     }
     else if(msgArr[0] == "/queue"){
-      var sender = request.name
-      responseText += sender
-      responseText += " placed in the queue for"
-      for(var i=1;i < msgArr.length;i++){
-        if(msgArr.length > 2 && i != 1) responseText += ","
-        if(i == msgArr.length - 1 && msgArr.length != 2) responseText += " and"
-        switch (msgArr[i]) {
-          case "sunday":
-            responseText += " Sunday at position "
-            sunday.push(sender)
-            responseText += sunday.length
-            break;
-          case "monday":
-            responseText += " Monday at position "
-            monday.push(sender)
-            responseText += monday.length
-            break;
-          case "tuesday":
-            responseText += " Tuesday at position "
-            tuesday.push(sender)
-            responseText += tuesday.length
-            break;
-          case "wednesday":
-            responseText += " Wednesday at position "
-            wednesday.push(sender)
-            responseText += wednesday.length
-            break;
-          case "thursday":
-            responseText += " Thursday at position "
-            thursday.push(sender)
-            responseText += thursday.length
-            break;
-          case "friday":
-            responseText += " Friday at position "
-            friday.push(sender)
-            responseText += friday.length
-            break;
-          case "saturday":
-            responseText += " Saturday at position "
-            saturday.push(sender)
-            responseText += saturday.length
-            break;
-          default:
-            responseText += "that's not a day of the week dumbass"
-            break;
+      if(maintenanceMode == 1){
+        responseText = "My creator put me in maintenance mode until I stop forgetting the queue every day"
+      }
+      else if(msgArr.length == 1){
+        responseText = "Must include at least one day of the week to be added to the queue"
+      }
+      else{
+        var sender = request.name
+        responseText += sender
+        responseText += " placed in the queue for"
+        for(var i=1;i < msgArr.length;i++){
+          if(i > 2) responseText += ","
+          if(i == msgArr.length - 1 && msgArr.length != 2) responseText += " and"
+          switch (msgArr[i]) {
+            case "sunday":
+              responseText += " Sunday at position "
+              sunday.push(sender)
+              responseText += sunday.length
+              break;
+            case "monday":
+              responseText += " Monday at position "
+              monday.push(sender)
+              responseText += monday.length
+              break;
+            case "tuesday":
+              responseText += " Tuesday at position "
+              tuesday.push(sender)
+              responseText += tuesday.length
+              break;
+            case "wednesday":
+              responseText += " Wednesday at position "
+              wednesday.push(sender)
+              responseText += wednesday.length
+              break;
+            case "thursday":
+              responseText += " Thursday at position "
+              thursday.push(sender)
+              responseText += thursday.length
+              break;
+            case "friday":
+              responseText += " Friday at position "
+              friday.push(sender)
+              responseText += friday.length
+              break;
+            case "saturday":
+              responseText += " Saturday at position "
+              saturday.push(sender)
+              responseText += saturday.length
+              break;
+            default:
+              responseText += "that's not a day of the week dumbass"
+              break;
+          }
         }
       }
       this.res.writeHead(200);
       postMessage(responseText);
       this.res.end();
     }
+    // else if(msgArr[0] == "/uploadtest"){
+    //   var upFile = fs.readFileSync("queue.txt")
+    //   getSignedRequest(upFile)
+    // }
     else{
       console.log("Nothing to do");
       this.res.writeHead(200);
@@ -327,6 +348,38 @@ function respond() {
   }
 }
 
+// function getSignedRequest(file){
+//   const xhr = new XMLHttpRequest();
+//   xhr.open('GET', `/sign-s3?file-name=${file.name}&file-type=${file.type}`);
+//   xhr.onreadystatechange = () => {
+//     if(xhr.readyState === 4){
+//       if(xhr.status === 200){
+//         const response = JSON.parse(xhr.responseText);
+//         uploadFile(file, response.signedRequest, response.url);
+//       }
+//       else{
+//         alert('Could not get signed URL.');
+//       }
+//     }
+//   };
+//   xhr.send();
+// }
+
+// function uploadFile(file, signedRequest, url){
+//   const xhr = new XMLHttpRequest();
+//   xhr.open('PUT', signedRequest);
+//   xhr.onreadystatechange = () => {
+//     if(xhr.readyState === 4){
+//       if(xhr.status === 200){
+//         console.log("Uploaded file")
+//       }
+//       else{
+//         alert('Could not upload file.');
+//       }
+//     }
+//   };
+//   xhr.send(file);
+// }
 
 function postMessage(msg) {
   var botResponse, options, body, botReq;
