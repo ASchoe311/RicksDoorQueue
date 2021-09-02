@@ -336,10 +336,6 @@ function respond() {
       postMessage(responseText);
       this.res.end();
     }
-    // else if(msgArr[0] == "/uploadtest"){
-    //   var upFile = fs.readFileSync("queue.txt")
-    //   getSignedRequest(upFile)
-    // }
     else{
       console.log("Nothing to do");
       this.res.writeHead(200);
@@ -347,39 +343,6 @@ function respond() {
     }
   }
 }
-
-// function getSignedRequest(file){
-//   const xhr = new XMLHttpRequest();
-//   xhr.open('GET', `/sign-s3?file-name=${file.name}&file-type=${file.type}`);
-//   xhr.onreadystatechange = () => {
-//     if(xhr.readyState === 4){
-//       if(xhr.status === 200){
-//         const response = JSON.parse(xhr.responseText);
-//         uploadFile(file, response.signedRequest, response.url);
-//       }
-//       else{
-//         alert('Could not get signed URL.');
-//       }
-//     }
-//   };
-//   xhr.send();
-// }
-
-// function uploadFile(file, signedRequest, url){
-//   const xhr = new XMLHttpRequest();
-//   xhr.open('PUT', signedRequest);
-//   xhr.onreadystatechange = () => {
-//     if(xhr.readyState === 4){
-//       if(xhr.status === 200){
-//         console.log("Uploaded file")
-//       }
-//       else{
-//         alert('Could not upload file.');
-//       }
-//     }
-//   };
-//   xhr.send(file);
-// }
 
 function postMessage(msg) {
   var botResponse, options, body, botReq;
