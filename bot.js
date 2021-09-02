@@ -1,10 +1,6 @@
 var HTTPS = require('https');
 var botID = "bee00e962e7dd0d8fbc79f9f03";
 
-const aws = require('aws-sdk')
-const S3_BUCKET = process.env.S3_BUCKET
-aws.config.region = 'us-east-2';
-
 const maintenanceMode = 1
 
 var sunday = []
