@@ -1,8 +1,14 @@
 var HTTPS = require('https');
-// var botID = "bee00e962e7dd0d8fbc79f9f03";
-var botID = "3964152c789e251f4a7d5c864b";
+var botID = "";
 
 const maintenanceMode = 1
+
+if(maintenanceMode != 0) {   
+  botID = "bee00e962e7dd0d8fbc79f9f03"
+}
+else{
+  botID = "3964152c789e251f4a7d5c864b"
+}
 
 var sunday = []
 var monday = []
@@ -148,7 +154,8 @@ function respond() {
             }
             break;
           default:
-            responseText += "that's not a day of the week dumbass"
+            responseText += msgArr[1]
+            responseText += " is not a day of the week"
             break;
         }
       }
@@ -264,7 +271,8 @@ function respond() {
             }
             break;
           default:
-            responseText += "that's not a day of the week dumbass"
+            responseText += msgArr[1]
+            responseText += " is not a day of the week"
             break;
         }
       }
@@ -324,7 +332,7 @@ function respond() {
               responseText += saturday.length
               break;
             default:
-              responseText += "that's not a day of the week dumbass"
+              // responseText += ""
               break;
           }
         }
@@ -332,6 +340,11 @@ function respond() {
       this.res.writeHead(200);
       postMessage(responseText);
       this.res.end();
+    }
+    else if(msgArr[0] == "/queuehelp"){
+      responseText = "How to use queubot:\n"
+      responseText += "Add yourself to the queue for a given day by sending \"/queue <day>\". Multiple days can be specified at once (e.g. /queue friday saturday).\n"
+      responseText += "Remove "
     }
     else{
       console.log("Nothing to do");
