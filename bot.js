@@ -50,6 +50,7 @@ function respond() {
   var D = new Date()
   if(D.getDay == 1) clearQueue()
   var request = JSON.parse(this.req.chunks[0])
+  console.log(request)
   var responseText = ""
   if (request.text) {
     var msgArr = request.text.toLowerCase().split(" ")

@@ -1,5 +1,6 @@
-var http, director, bot, router, server, port;
+var http, director, bot, router, server, port, cron;
 
+cron        = require('node-cron');
 http        = require('http');
 director    = require('director');
 bot         = require('./bot.js');
@@ -22,6 +23,13 @@ server = http.createServer(function (req, res) {
   });
 });
 
+var cronJob = cron.job("*/1 * * * *", function() {
+  bot.clearQueue()
+  console.log("Cleared the queue!")
+});
+
+
+// "0 0 * * SUN"
 port = Number(process.env.PORT || 8080);
 server.listen(port);
 
