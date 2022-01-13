@@ -1,7 +1,7 @@
 {
-  "name": "node-js-getting-started",
+  "name": "ricks-door-queue",
   "version": "0.1.2",
-  "description": "A sample Node.js app using Express 4",
+  "description": "Queue manager",
   "main": "index.js",
   "scripts": {
     "start": "node index.js"
@@ -10,8 +10,8 @@
     "director": ""
   },
   "engines": {
-    "node": "v16.13.2",
-    "npm": "8.1.2"
+    "node": "12.21.0",
+    "npm": "6.14.11"
   },
   "repository": {
     "type": "git",
