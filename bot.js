@@ -4,10 +4,10 @@ var botID = "";
 const maintenanceMode = 2
 
 if(maintenanceMode != 0) {   
-  botID = "bee00e962e7dd0d8fbc79f9f03"
+  botID = "3964152c789e251f4a7d5c864b"
 }
 else{
-  botID = "3964152c789e251f4a7d5c864b"
+  botID = "bee00e962e7dd0d8fbc79f9f03"
 }
 
 var sunday = []
@@ -344,7 +344,9 @@ function respond() {
     else if(msgArr[0] == "/queuehelp"){
       responseText = "How to use queubot:\n"
       responseText += "Add yourself to the queue for a given day by sending \"/queue <day>\". Multiple days can be specified at once (e.g. /queue friday saturday).\n"
-      responseText += "Remove "
+      responseText += "Remove yourself from the queue for a given day by sending \"/unqueue <day>\". Only one day can be specified at a time.\n"
+      responseText += "Check the queue for a given day by sending \"/queuecheck <day>\". Only one day can be specified at a time."
+      responseText += "Show this help message by sending \"/queuehelp\"."
     }
     else{
       console.log("Nothing to do");
