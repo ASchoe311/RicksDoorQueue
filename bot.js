@@ -347,6 +347,9 @@ function respond() {
       responseText += "Remove yourself from the queue for a given day by sending \"/unqueue <day>\". Only one day can be specified at a time.\n"
       responseText += "Check the queue for a given day by sending \"/queuecheck <day>\". Only one day can be specified at a time."
       responseText += "Show this help message by sending \"/queuehelp\"."
+      this.res.writeHead(200);
+      postMessage(responseText);
+      this.res.end();
     }
     else{
       console.log("Nothing to do");
