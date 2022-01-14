@@ -1,23 +1,23 @@
 var HTTPS = require('https');
 const { Module } = require('module');
-var botID = "";
+var botID = "bee00e962e7dd0d8fbc79f9f03";
 
-const maintenanceMode = 0
+const maintenanceMode = 0;
 
-if(maintenanceMode != 0) {   
-  botID = "3964152c789e251f4a7d5c864b"
-}
-else{
-  botID = "bee00e962e7dd0d8fbc79f9f03"
-}
+// if(maintenanceMode != 0) {   
+//   botID = "3964152c789e251f4a7d5c864b"
+// }
+// else{
+//   botID = "bee00e962e7dd0d8fbc79f9f03"
+// }
 
-var sunday = []
-var monday = []
-var tuesday = []
-var wednesday = []
-var thursday = []
-var friday = []
-var saturday = []
+var sunday = [];
+var monday = [];
+var tuesday = [];
+var wednesday = [];
+var thursday = [];
+var friday = [];
+var saturday = [];
 
 // function addfakes() {
 //     sunday.push("adam")
