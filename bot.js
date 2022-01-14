@@ -63,14 +63,12 @@ function clearQueue() {
     saturday.pop()
   }
   console.log("Queues cleared")
-  this.res.writeHead(200)
-  postMessage("Queues cleared for new week")
-  this.res.end()
+  // this.res.writeHead(200)
+  // postMessage("Queues cleared for new week")
+  // this.res.end()
 }
 
 function respond() {
-  var D = new Date()
-  if(D.getDay == 1) clearQueue()
   var request = JSON.parse(this.req.chunks[0])
   console.log(request)
   var responseText = ""
@@ -316,7 +314,7 @@ function respond() {
         responseText += sender
         responseText += " placed in the queue for"
         for(var i=1;i < msgArr.length;i++){
-          if(i > 1 && msgArr.length > 2) responseText += ","
+          if(i > 1 && msgArr.length > 3) responseText += ","
           if(i == msgArr.length - 1 && msgArr.length > 2) responseText += " and"
           switch (msgArr[i]) {
             case "sunday":

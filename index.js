@@ -25,13 +25,12 @@ server = http.createServer(function (req, res) {
 
 // bot.addfakes()
 
-cron.schedule("*/30 * * * * *", () => {
+cron.schedule("0 0 * * SUN", () => {
   // bot.check();
   console.log("Clearing the queue!")
   bot.clearQueue();
 });
 
-// "0 0 * * SUN"
 port = Number(process.env.PORT || 8080);
 server.listen(port);
 
