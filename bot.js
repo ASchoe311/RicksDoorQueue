@@ -2,7 +2,7 @@ var HTTPS = require('https');
 const { Module } = require('module');
 var botID = "";
 
-const maintenanceMode = 2
+const maintenanceMode = 0
 
 if(maintenanceMode != 0) {   
   botID = "3964152c789e251f4a7d5c864b"
