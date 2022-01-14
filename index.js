@@ -23,7 +23,11 @@ server = http.createServer(function (req, res) {
   });
 });
 
+// bot.addfakes()
+
 cron.schedule("*/30 * * * * *", () => {
+  // bot.check();
+  console.log("Clearing the queue!")
   bot.clearQueue();
 });
 

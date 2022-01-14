@@ -19,8 +19,28 @@ var thursday = []
 var friday = []
 var saturday = []
 
+// function addfakes() {
+//     sunday.push("adam")
+//     monday.push("adam")
+//     tuesday.push("adam")
+//     wednesday.push("adam")
+//     thursday.push("adam")
+//     friday.push("adam")
+//     saturday.push("adam")
+// }
+
+// function check() {
+//   console.log("Queues:")
+//   console.log(sunday)
+//   console.log(monday)
+//   console.log(tuesday)
+//   console.log(wednesday)
+//   console.log(thursday)
+//   console.log(friday)
+//   console.log(saturday)
+// }
+
 function clearQueue() {
-  console.log("Clearing the queue!")
   while(sunday.length > 0){
     sunday.pop()
   }
@@ -296,8 +316,8 @@ function respond() {
         responseText += sender
         responseText += " placed in the queue for"
         for(var i=1;i < msgArr.length;i++){
-          if(i > 2) responseText += ","
-          if(i == msgArr.length - 1 && msgArr.length != 2) responseText += " and"
+          if(i > 1 && msgArr.length > 2) responseText += ","
+          if(i == msgArr.length - 1 && msgArr.length > 2) responseText += " and"
           switch (msgArr[i]) {
             case "sunday":
               responseText += " Sunday at position "
@@ -400,3 +420,5 @@ function postMessage(msg) {
 
 exports.respond = respond;
 exports.clearQueue = clearQueue;
+// exports.check = check;
+// exports.addfakes = addfakes;
