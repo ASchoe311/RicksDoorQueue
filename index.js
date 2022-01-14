@@ -31,6 +31,10 @@ cron.schedule("0 0 * * SUN", () => {
   bot.clearQueue();
 });
 
+cron.schedule("*/5 * * * *", () => {
+  console.log("Staying alive!")
+});
+
 port = Number(process.env.PORT || 8080);
 server.listen(port);
 

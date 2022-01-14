@@ -186,31 +186,31 @@ function respond() {
     }
     else if(msgArr[0] == "/queuecheck"){
       if(maintenanceMode == 1){
-        responseText = "My creator put me in maintenance mode until I stop forgetting the queue every day"
-        console.log(responseText)
+        responseText = "My creator put me in maintenance mode until I stop forgetting the queue every day";
+        console.log(responseText);
         this.res.writeHead(200);
         postMessage(responseText);
         this.res.end();
       }
-      if(msgArr.length == 1){
-        msgArr = ["blank", "sunday", "monday", "tuesday", "wednesday", "thursday", "friday", "saturday"]
-      }
       else{
+        if(msgArr.length == 1){
+          msgArr = ["blank", "sunday", "monday", "tuesday", "wednesday", "thursday", "friday", "saturday"];
+        }
         for(var i=1; i<msgArr.length; i++){
-          responseText = ""
+          responseText = "";
           switch (msgArr[i]) {
             case "sunday":
               if(sunday.length == 0){
-                responseText = "The queue for Sunday is empty"
+                responseText = "The queue for Sunday is empty";
                 break;
               }
-              responseText += "Queue to have Sunday taken:\n"
+              responseText += "Queue to have Sunday taken:\n";
               for(var j = 0; j < sunday.length; j++){
-                responseText += "Position "
-                responseText += (j + 1)
-                responseText += " is "
-                responseText += sunday[j]
-                responseText += "\n"
+                responseText += "Position ";
+                responseText += (j + 1);
+                responseText += " is ";
+                responseText += sunday[j];
+                responseText += "\n";
               }
               break;
             case "monday":
