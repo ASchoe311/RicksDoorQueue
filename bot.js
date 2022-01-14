@@ -193,7 +193,7 @@ function respond() {
         this.res.end();
       }
       if(msgArr.length == 1){
-        msgArr = ["sunday", "monday", "tuesday", "wednesday", "thursday", "friday", "saturday"]
+        msgArr = ["blank", "sunday", "monday", "tuesday", "wednesday", "thursday", "friday", "saturday"]
       }
       else{
         for(var i=1; i<msgArr.length; i++){
@@ -205,11 +205,11 @@ function respond() {
                 break;
               }
               responseText += "Queue to have Sunday taken:\n"
-              for(var i = 0; i < sunday.length; i++){
+              for(var j = 0; j < sunday.length; j++){
                 responseText += "Position "
-                responseText += (i + 1)
+                responseText += (j + 1)
                 responseText += " is "
-                responseText += sunday[i]
+                responseText += sunday[j]
                 responseText += "\n"
               }
               break;
@@ -219,11 +219,11 @@ function respond() {
                 break;
               }
               responseText += "Queue to have Monday taken:\n"
-              for(var i = 0; i < monday.length; i++){
+              for(var j = 0; j < monday.length; j++){
                 responseText += "Position "
-                responseText += (i + 1)
+                responseText += (j + 1)
                 responseText += " is "
-                responseText += monday[i]
+                responseText += monday[j]
                 responseText += "\n"
               }
               break;
@@ -233,11 +233,11 @@ function respond() {
                 break;
               }
               responseText += "Queue to have Tuesday taken:\n"
-              for(var i = 0; i < tuesday.length; i++){
+              for(var j = 0; j < tuesday.length; j++){
                 responseText += "Position "
-                responseText += (i + 1)
+                responseText += (j + 1)
                 responseText += " is "
-                responseText += tuesday[i]
+                responseText += tuesday[j]
                 responseText += "\n"
               }
               break;
@@ -247,11 +247,11 @@ function respond() {
                 break;
               }
               responseText += "Queue to have Wednesday taken:\n"
-              for(var i = 0; i < wednesday.length; i++){
+              for(var j = 0; j < wednesday.length; j++){
                 responseText += "Position "
-                responseText += (i + 1)
+                responseText += (j + 1)
                 responseText += " is "
-                responseText += wednesday[i]
+                responseText += wednesday[j]
                 responseText += "\n"
               }
               break;
@@ -261,11 +261,11 @@ function respond() {
                 break;
               }
               responseText += "Queue to have Thursday taken:\n"
-              for(var i = 0; i < thursday.length; i++){
+              for(var j = 0; j < thursday.length; j++){
                 responseText += "Position "
-                responseText += (i + 1)
+                responseText += (j + 1)
                 responseText += " is "
-                responseText += thursday[i]
+                responseText += thursday[j]
                 responseText += "\n"
               }
               break;
@@ -275,11 +275,11 @@ function respond() {
                 break;
               }
               responseText += "Queue to have Friday taken:\n"
-              for(var i = 0; i < friday.length; i++){
+              for(var j = 0; j < friday.length; j++){
                 responseText += "Position "
-                responseText += (i + 1)
+                responseText += (j + 1)
                 responseText += " is "
-                responseText += friday[i]
+                responseText += friday[j]
                 responseText += "\n"
               }
               break;
@@ -289,11 +289,11 @@ function respond() {
                 break;
               }
               responseText += "Queue to have Saturday taken:\n"
-              for(var i = 0; i < saturday.length; i++){
+              for(var j = 0; j < saturday.length; j++){
                 responseText += "Position "
-                responseText += (i + 1)
+                responseText += (j + 1)
                 responseText += " is "
-                responseText += saturday[i]
+                responseText += saturday[j]
                 responseText += "\n"
               }
               break;
