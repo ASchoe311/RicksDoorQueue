@@ -192,12 +192,8 @@ function respond() {
         postMessage(responseText);
         this.res.end();
       }
-      else if(msgArr.length == 1){
-        responseText = "Must input a specific day of the week to check the queue"
-        console.log(responseText)
-        this.res.writeHead(200);
-        postMessage(responseText);
-        this.res.end();
+      if(msgArr.length == 1){
+        msgArr = ["sunday", "monday", "tuesday", "wednesday", "thursday", "friday", "saturday"]
       }
       else{
         for(var i=1; i<msgArr.length; i++){
@@ -378,6 +374,7 @@ function respond() {
       responseText += "\"/queue <day1> <day2> ...\": Add yourself to the queue for a given day or set of days.\n"
       responseText += "\"/unqueue <day>\": Remove yourself from the queue for a given day.\n"
       responseText += "\"/queuecheck <day1> <day2> ...\": Check the queue for a given day or set of days.\n"
+      responseText += "\"/queuecheck\": Check the queue for all days.\n"
       responseText += "\"/queuehelp\": Show this help message."
       this.res.writeHead(200);
       postMessage(responseText);
