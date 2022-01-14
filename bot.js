@@ -187,120 +187,131 @@ function respond() {
     else if(msgArr[0] == "/queuecheck"){
       if(maintenanceMode == 1){
         responseText = "My creator put me in maintenance mode until I stop forgetting the queue every day"
+        console.log(responseText)
+        this.res.writeHead(200);
+        postMessage(responseText);
+        this.res.end();
       }
       else if(msgArr.length == 1){
         responseText = "Must input a specific day of the week to check the queue"
+        console.log(responseText)
+        this.res.writeHead(200);
+        postMessage(responseText);
+        this.res.end();
       }
       else{
-        switch (msgArr[1]) {
-          case "sunday":
-            if(sunday.length == 0){
-              responseText = "The queue for Sunday is empty"
+        for(var i=1; i<msgArr.length; i++){
+          responseText = ""
+          switch (msgArr[i]) {
+            case "sunday":
+              if(sunday.length == 0){
+                responseText = "The queue for Sunday is empty"
+                break;
+              }
+              responseText += "Queue to have Sunday taken:\n"
+              for(var i = 0; i < sunday.length; i++){
+                responseText += "Position "
+                responseText += (i + 1)
+                responseText += " is "
+                responseText += sunday[i]
+                responseText += "\n"
+              }
               break;
-            }
-            responseText += "Queue to have Sunday taken:\n"
-            for(var i = 0; i < sunday.length; i++){
-              responseText += "Position "
-              responseText += (i + 1)
-              responseText += " is "
-              responseText += sunday[i]
-              responseText += "\n"
-            }
-            break;
-          case "monday":
-            if(monday.length == 0){
-              responseText = "The queue for Monday is empty"
+            case "monday":
+              if(monday.length == 0){
+                responseText = "The queue for Monday is empty"
+                break;
+              }
+              responseText += "Queue to have Monday taken:\n"
+              for(var i = 0; i < monday.length; i++){
+                responseText += "Position "
+                responseText += (i + 1)
+                responseText += " is "
+                responseText += monday[i]
+                responseText += "\n"
+              }
               break;
-            }
-            responseText += "Queue to have Monday taken:\n"
-            for(var i = 0; i < monday.length; i++){
-              responseText += "Position "
-              responseText += (i + 1)
-              responseText += " is "
-              responseText += monday[i]
-              responseText += "\n"
-            }
-            break;
-          case "tuesday":
-            if(tuesday.length == 0){
-              responseText = "The queue for Tuesday is empty"
+            case "tuesday":
+              if(tuesday.length == 0){
+                responseText = "The queue for Tuesday is empty"
+                break;
+              }
+              responseText += "Queue to have Tuesday taken:\n"
+              for(var i = 0; i < tuesday.length; i++){
+                responseText += "Position "
+                responseText += (i + 1)
+                responseText += " is "
+                responseText += tuesday[i]
+                responseText += "\n"
+              }
               break;
-            }
-            responseText += "Queue to have Tuesday taken:\n"
-            for(var i = 0; i < tuesday.length; i++){
-              responseText += "Position "
-              responseText += (i + 1)
-              responseText += " is "
-              responseText += tuesday[i]
-              responseText += "\n"
-            }
-            break;
-          case "wednesday":
-            if(wednesday.length == 0){
-              responseText = "The queue for Wednesday is empty"
+            case "wednesday":
+              if(wednesday.length == 0){
+                responseText = "The queue for Wednesday is empty"
+                break;
+              }
+              responseText += "Queue to have Wednesday taken:\n"
+              for(var i = 0; i < wednesday.length; i++){
+                responseText += "Position "
+                responseText += (i + 1)
+                responseText += " is "
+                responseText += wednesday[i]
+                responseText += "\n"
+              }
               break;
-            }
-            responseText += "Queue to have Wednesday taken:\n"
-            for(var i = 0; i < wednesday.length; i++){
-              responseText += "Position "
-              responseText += (i + 1)
-              responseText += " is "
-              responseText += wednesday[i]
-              responseText += "\n"
-            }
-            break;
-          case "thursday":
-            if(thursday.length == 0){
-              responseText = "The queue for Thursday is empty"
+            case "thursday":
+              if(thursday.length == 0){
+                responseText = "The queue for Thursday is empty"
+                break;
+              }
+              responseText += "Queue to have Thursday taken:\n"
+              for(var i = 0; i < thursday.length; i++){
+                responseText += "Position "
+                responseText += (i + 1)
+                responseText += " is "
+                responseText += thursday[i]
+                responseText += "\n"
+              }
               break;
-            }
-            responseText += "Queue to have Thursday taken:\n"
-            for(var i = 0; i < thursday.length; i++){
-              responseText += "Position "
-              responseText += (i + 1)
-              responseText += " is "
-              responseText += thursday[i]
-              responseText += "\n"
-            }
-            break;
-          case "friday":
-            if(friday.length == 0){
-              responseText = "The queue for Friday is empty"
+            case "friday":
+              if(friday.length == 0){
+                responseText = "The queue for Friday is empty"
+                break;
+              }
+              responseText += "Queue to have Friday taken:\n"
+              for(var i = 0; i < friday.length; i++){
+                responseText += "Position "
+                responseText += (i + 1)
+                responseText += " is "
+                responseText += friday[i]
+                responseText += "\n"
+              }
               break;
-            }
-            responseText += "Queue to have Friday taken:\n"
-            for(var i = 0; i < friday.length; i++){
-              responseText += "Position "
-              responseText += (i + 1)
-              responseText += " is "
-              responseText += friday[i]
-              responseText += "\n"
-            }
-            break;
-          case "saturday":
-            if(saturday.length == 0){
-              responseText = "The queue for Saturday is empty"
+            case "saturday":
+              if(saturday.length == 0){
+                responseText = "The queue for Saturday is empty"
+                break;
+              }
+              responseText += "Queue to have Saturday taken:\n"
+              for(var i = 0; i < saturday.length; i++){
+                responseText += "Position "
+                responseText += (i + 1)
+                responseText += " is "
+                responseText += saturday[i]
+                responseText += "\n"
+              }
               break;
-            }
-            responseText += "Queue to have Saturday taken:\n"
-            for(var i = 0; i < saturday.length; i++){
-              responseText += "Position "
-              responseText += (i + 1)
-              responseText += " is "
-              responseText += saturday[i]
-              responseText += "\n"
-            }
-            break;
-          default:
-            responseText += msgArr[1]
-            responseText += " is not a day of the week"
-            break;
+            default:
+              responseText += msgArr[i]
+              responseText += " is not a day of the week"
+              break;
+          }
+          console.log(responseText)
+          this.res.writeHead(200);
+          postMessage(responseText);
+          this.res.end();
         }
       }
-      console.log(responseText)
-      this.res.writeHead(200);
-      postMessage(responseText);
-      this.res.end();
     }
     else if(msgArr[0] == "/queue"){
       if(maintenanceMode == 1){
@@ -363,11 +374,11 @@ function respond() {
       this.res.end();
     }
     else if(msgArr[0] == "/queuehelp"){
-      responseText = "How to use queubot:\n"
-      responseText += "Add yourself to the queue for a given day by sending \"/queue <day>\". Multiple days can be specified at once (e.g. /queue friday saturday).\n"
-      responseText += "Remove yourself from the queue for a given day by sending \"/unqueue <day>\". Only one day can be specified at a time.\n"
-      responseText += "Check the queue for a given day by sending \"/queuecheck <day>\". Only one day can be specified at a time."
-      responseText += "Show this help message by sending \"/queuehelp\"."
+      responseText = "QueueBot Commands:\n"
+      responseText += "\"/queue <day1> <day2> ...\": Add yourself to the queue for a given day or set of days.\n"
+      responseText += "\"/unqueue <day>\": Remove yourself from the queue for a given day.\n"
+      responseText += "\"/queuecheck <day1> <day2> ...\": Check the queue for a given day or set of days.\n"
+      responseText += "\"/queuehelp\": Show this help message."
       this.res.writeHead(200);
       postMessage(responseText);
       this.res.end();
