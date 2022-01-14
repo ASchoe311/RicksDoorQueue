@@ -1,13 +1,10 @@
 {
   "name": "ricks-door-queue",
-  "version": "0.1.2",
+  "version": "0.1",
   "description": "Queue manager",
   "main": "index.js",
   "scripts": {
     "start": "node index.js"
-  },
-  "dependencies": {
-    "director": ""
   },
   "engines": {
     "node": "12.21.0",
@@ -22,5 +19,11 @@
     "heroku",
     "express"
   ],
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "@types/director": "^1.2.1",
+    "@types/node-cron": "^3.0.1",
+    "director": "^1.2.8",
+    "node-cron": "^3.0.0"
+  }
 }

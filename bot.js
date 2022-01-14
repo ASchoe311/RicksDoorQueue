@@ -1,4 +1,5 @@
 var HTTPS = require('https');
+const { Module } = require('module');
 var botID = "";
 
 const maintenanceMode = 2
@@ -19,25 +20,26 @@ var friday = []
 var saturday = []
 
 function clearQueue() {
-  while(!sunday.length > 0){
+  console.log("Clearing the queue!")
+  while(sunday.length > 0){
     sunday.pop()
   }
-  while(!monday.length > 0){
+  while(monday.length > 0){
     monday.pop()
   }
-  while(!tuesday.length > 0){
+  while(tuesday.length > 0){
     tuesday.pop()
   }
-  while(!wednesday.length > 0){
+  while(wednesday.length > 0){
     wednesday.pop()
   }
-  while(!thursday.length > 0){
+  while(thursday.length > 0){
     thursday.pop()
   }
-  while(!friday.length > 0){
+  while(friday.length > 0){
     friday.pop()
   }
-  while(!saturday.length > 0){
+  while(saturday.length > 0){
     saturday.pop()
   }
   console.log("Queues cleared")
@@ -397,3 +399,4 @@ function postMessage(msg) {
 
 
 exports.respond = respond;
+exports.clearQueue = clearQueue;
