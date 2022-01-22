@@ -24,7 +24,9 @@
             font-variant: small-caps;
             text-decoration: underline solid rgb(68, 68, 68);
         }
-        h1,h2{ text-align: center; }
+        h1,h2,li{ text-align: center; }
+        li { padding-bottom: 10px; }
+        ol { padding-left: 0; }
         </style>
     </head>
     <body>
