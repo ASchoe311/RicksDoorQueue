@@ -1,5 +1,7 @@
 var http, director, bot, router, server, port;
 
+var eta = require("eta")
+var path = require("path")
 var cron    = require('node-cron');
 http        = require('http');
 director    = require('director');
@@ -8,7 +10,10 @@ bot         = require('./bot.js');
 router = new director.http.Router({
   '/' : {
     post: bot.respond,
-    get: ping
+    get: renderTable
+  },
+  '/manualqueue': {
+    post: [bot.addToQueue, renderTable]
   }
 });
 
@@ -38,7 +43,14 @@ cron.schedule("*/5 * * * *", () => {
 port = Number(process.env.PORT || 8080);
 server.listen(port);
 
-function ping() {
+async function renderTable() {
+  // Set Eta's configuration
+  eta.configure({
+    // This tells Eta to look for templates
+    // In the /views directory
+    views: path.join(__dirname, "views")
+  })
+  rendered = await eta.renderFile("./index", { queueDict: bot.queue })
   this.res.writeHead(200);
-  this.res.end("Hey, I'm the Queue Guy.");
+  this.res.end(rendered);
 }
