@@ -44,10 +44,7 @@ function respond() {
   if (request.text) {
     var msgArr = request.text.toLowerCase().split(" ")
     if(msgArr[0] == "/unqueue"){
-      if(maintenanceMode == 1){
-        responseText = "My creator put me in maintenance mode until I stop forgetting the queue every day"
-      }
-      else if(msgArr.length == 1){
+      if(msgArr.length == 1){
         responseText = "ERROR - /unqueue: No day specified"
       }
       else if(!(msgArr[1] in queueDict)){
@@ -71,10 +68,7 @@ function respond() {
     }
     else if(msgArr[0] == "/queuecheck"){
       responseText = "";
-      if(maintenanceMode == 1){
-        responseText = "My creator put me in maintenance mode until I stop forgetting the queue every day";
-      }
-      else if(msgArr.length == 1){
+      if(msgArr.length == 1){
         responseText = "ERROR - /queuecheck: No days (or 'all') specified"
       }
       else{
@@ -109,10 +103,7 @@ function respond() {
       this.res.end();
     }
     else if(msgArr[0] == "/queue"){
-      if(maintenanceMode == 1){
-        responseText = "My creator put me in maintenance mode until I stop forgetting the queue every day"
-      }
-      else if(msgArr.length == 1){
+      if(msgArr.length == 1){
         responseText = "ERROR - /queue: No day(s) specified"
       }
       else{
@@ -141,12 +132,19 @@ function respond() {
       postMessage(responseText);
       this.res.end();
     }
+    else if(msgArr[0] == "/queuesite"){
+      responseText = "https://dhezg3kwhr.us-east-2.awsapprunner.com/"
+      this.res.writeHead(200);
+      postMessage(responseText);
+      this.res.end();
+    }
     else if(msgArr[0] == "/queuehelp"){
       responseText = "QueueBot Commands:\n"
       responseText += "\"/queue <day1> <day2> ...\": Add yourself to the queue for a given day or set of days.\n"
       responseText += "\"/unqueue <day>\": Remove yourself from the queue for a given day.\n"
       responseText += "\"/queuecheck <day1> <day2> ...\": Check the queue for a given day or set of days.\n"
       responseText += "\"/queuecheck all\": Check the queue for all days.(No longer sends 7 seperate messages!)\n"
+      responseText += "\"/queuesite\": Sends the link to view/interact with the queue as a web page\n"
       responseText += "\"/queuehelp\": Show this help message."
       this.res.writeHead(200);
       postMessage(responseText);
