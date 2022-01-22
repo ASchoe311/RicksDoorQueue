@@ -1,0 +1,71 @@
+<html>
+    <head>
+        <title>Door Queue</title>
+        <style>
+        .flex-container-rows {
+            display: flex;
+            flex-direction: row;
+            flex-wrap: nowrap;
+            justify-content: space-around;
+            align-items: center;
+            align-content: stretch;
+        }
+        .flex-items {
+            display: block;
+            flex-grow: 0;
+            flex-shrink: 1;
+            flex-basis: auto;
+            align-self: center;
+            align-items: center;
+            order: 0;
+        }
+        h1 { 
+            text-transform: capitalize;
+            font-variant: small-caps;
+            text-decoration: underline solid rgb(68, 68, 68);
+        }
+        h1,h2{ text-align: center; }
+        </style>
+    </head>
+    <body>
+        <div class="flex-container-rows">
+            <% Object.keys(it.queueDict).forEach(function(day) { %>
+            <div class="flex-items">
+                <h1><%= day %></h1>
+                <% if (it.queueDict[day].length == 0) { %>
+                <h2>Empty!</h2>
+                <% } else { %>
+                <ol>
+                    <% it.queueDict[day].forEach(function(person) { %>
+                    <li><%= person %></li>
+                    <% }) %>
+                </ol>
+                <% } %>
+            </div>
+            <% }) %>
+        </div>
+        <!-- Code by w3codegenerator.com -->
+        <form class="generated-form"  method="POST" action="/manualqueue" enctype="application/json" target="_self">
+        <fieldset>
+           <legend>Add yourself to the queue:</legend>
+           <label for="name">Name:</label><br>
+           <input type="text" id="name" name="name"><br>
+           <input type="checkbox" id="sunday" name="days" value="sunday">
+           <label for="sunday"> Sunday</label><br>
+           <input type="checkbox" id="monday" name="days" value="monday">
+           <label for="monday"> Monday</label><br>
+           <input type="checkbox" id="tuesday" name="days" value="tuesday">
+           <label for="tuesday"> Tuesday</label><br>
+           <input type="checkbox" id="wednesday" name="days" value="wednesday">
+           <label for="wednesday"> Wednesday</label><br>
+           <input type="checkbox" id="thursday" name="days" value="thursday">
+           <label for="thursday"> Thursday</label><br>
+           <input type="checkbox" id="friday" name="days" value="friday">
+           <label for="friday"> Friday</label><br>
+           <input type="checkbox" id="saturday" name="days" value="saturday">
+           <label for="saturday"> Saturday</label><br>
+           <input type="submit" value="Queue Me!"><br><br>
+        </fieldset>
+        </form>
+    </body>
+</html>
