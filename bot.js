@@ -23,15 +23,16 @@ function clearQueue() {
 }
 
 function addToQueue() {
-  req = querystring.parse(this.req.chunks[0]);
+  formData = querystring.parse(this.req.chunks[0]);
+  if(formData['name'] == "" || !("days" in formData)) { return }
   console.log("Manual queue request received")
-  console.log(req)
-  if(typeof(req['days']) == "string"){
-    queueDict[req['days']].push(req['name'])
+  console.log(formData)
+  if(typeof(formData['days']) == "string"){
+    queueDict[formData['days']].push(formData['name'])
   }
   else{
-    for(let i=0; i<req['days'].length; i++){
-      queueDict[req['days'][i]].push(req['name'])
+    for(let i=0; i<formData['days'].length; i++){
+      queueDict[formData['days'][i]].push(formData['name'])
     }
   }
 }
