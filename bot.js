@@ -23,16 +23,21 @@ function clearQueue() {
 }
 
 function addToQueue() {
-  formData = querystring.parse(this.req.chunks[0]);
+  var formData = querystring.parse(this.req.chunks[0]);
   if(formData['name'] == "" || !("days" in formData)) { return }
   console.log("Manual queue request received")
   console.log(formData)
   if(typeof(formData['days']) == "string"){
-    queueDict[formData['days']].push(formData['name'])
+    if(queueDict[formData['days']].indexOf(formData['name']) == -1){
+      queueDict[formData['days']].push(formData['name'])
+    }
+    return;
   }
   else{
     for(let i=0; i<formData['days'].length; i++){
-      queueDict[formData['days'][i]].push(formData['name'])
+      if(queueDict[formData['days'][i]].indexOf(formData['name']) == -1){
+        queueDict[formData['days'][i]].push(formData['name'])
+      }
     }
   }
 }
@@ -53,14 +58,13 @@ function respond() {
       else{
         queueLocation = queueDict[msgArr[1]].indexOf(request.name)
         if(queueLocation == -1){
-          responseText += request.name + "was not found in the queue for "
-          responseText += msgArr[1].charAt(0).toUpperCase() + msgArr[1].slice(1)
+          responseText += request.name + " was not found in the queue for "
         }
         else{
           queueDict[msgArr[1]].splice(queueLocation, 1)
           responseText += request.name + " removed from the queue for "
-          responseText += msgArr[1].charAt(0).toUpperCase() + msgArr[1].slice(1)
         }
+        responseText += msgArr[1].charAt(0).toUpperCase() + msgArr[1].slice(1)
       }
       this.res.writeHead(200);
       postMessage(responseText);
@@ -103,6 +107,7 @@ function respond() {
       this.res.end();
     }
     else if(msgArr[0] == "/queue"){
+      var queued = 0
       if(msgArr.length == 1){
         responseText = "ERROR - /queue: No day(s) specified"
       }
@@ -118,22 +123,28 @@ function respond() {
         if(!error){
           var sender = request.name
           responseText += sender
-          responseText += " placed in the queue for"
+          responseText += " placed in the queue for "
           for(var i=1;i < msgArr.length;i++){
-            if(i > 1 && msgArr.length > 3) responseText += ","
-            if(i == msgArr.length - 1 && msgArr.length > 2) responseText += " and"
-            queueDict[msgArr[i]].push(sender)
-            responseText += " " + msgArr[i].charAt(0).toUpperCase() + msgArr[i].slice(1)
-            responseText += " at position " + queueDict[msgArr[i]].length
+            if(queueDict[msgArr[i]].indexOf(sender) == -1){
+              queued += 1
+              if(queued > 1 && msgArr.length > 3) responseText += ", "
+              if(i == msgArr.length - 1 && queued >= 2) responseText += " and "
+              queueDict[msgArr[i]].push(sender)
+              responseText += msgArr[i].charAt(0).toUpperCase() + msgArr[i].slice(1)
+              responseText += " at position " + queueDict[msgArr[i]].length
+            }
+            else{
+              msgArr.splice(i, 1)
+            }
           }
         }
       }
       this.res.writeHead(200);
-      postMessage(responseText);
+      if(queued > 0){ postMessage(responseText); }
       this.res.end();
     }
     else if(msgArr[0] == "/queuesite"){
-      responseText = "https://dhezg3kwhr.us-east-2.awsapprunner.com/"
+      responseText = "http://dqr.adamschoe.com/"
       this.res.writeHead(200);
       postMessage(responseText);
       this.res.end();

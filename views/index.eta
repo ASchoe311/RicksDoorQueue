@@ -46,7 +46,6 @@
         </div>
         <!-- Code by w3codegenerator.com -->
         <form class="generated-form"  method="POST" action="/manualqueue" enctype="application/json" target="_self">
-        <% /* <form class="generated-form" onsubmit="return handleSubmit();"> */ %>
         <fieldset>
            <label for="name">Name:</label><br>
            <input type="text" id="name" name="name"><br>
