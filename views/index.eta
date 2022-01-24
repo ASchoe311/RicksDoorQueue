@@ -1,73 +1,102 @@
 <html>
     <head>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
         <title>Door Queue</title>
-        <style>
-        .flex-container-rows {
-            display: flex;
-            flex-direction: row;
-            flex-wrap: nowrap;
-            justify-content: space-around;
-            align-items: center;
-            align-content: stretch;
-        }
-        .flex-items {
-            display: block;
-            flex-grow: 0;
-            flex-shrink: 1;
-            flex-basis: auto;
-            align-self: center;
-            align-items: center;
-            order: 0;
-        }
-        h1 { 
-            text-transform: capitalize;
-            font-variant: small-caps;
-            text-decoration: underline solid rgb(68, 68, 68);
-        }
-        h1,h2,li{ text-align: center; }
-        li { padding-bottom: 10px; }
-        ol { padding-left: 0; }
-        </style>
     </head>
     <body>
-        <div class="flex-container-rows">
-            <% Object.keys(it.queueDict).forEach(function(day) { %>
-            <div class="flex-items">
-                <h1><%= day %></h1>
-                <% if (it.queueDict[day].length == 0) { %>
-                <h2>Empty!</h2>
-                <% } else { %>
-                <ol>
-                    <% it.queueDict[day].forEach(function(person) { %>
-                    <li><%= person %></li>
-                    <% }) %>
-                </ol>
-                <% } %>
+        <div class="card px-3 w-100">
+        <div class="card-header bg-dark">
+        <ul class="nav nav-pills card-header-pills">
+            <li class="nav-item"><a class="nav-link active" data-toggle="list" href="#modern" role="tab">"Modern" View</a></li>
+            <li class="nav-item"><a class="nav-link" data-toggle="list" href="#table" role="tab">Table View</a></li>
+        </ul>
+        </div>
+        <div class="tab-content card-body jumbotron p-0 m-0">
+            <div class="tab-pane fade active show" id="modern" role="tabpanel">
+                <div class="container-fluid my-2">
+                    <div class="row">
+                        <% Object.keys(it.queueDict).forEach(function(day) { %>
+                        <div class="col-lg py-3">
+                            <h1 class="text-center text-capitalize"><%= day %></h1>
+                            <% if (it.queueDict[day].length == 0) { %>
+                            <li class="list-group-item"><h2 class="text-center">Empty!</h2></li>
+                            <% } else { %>
+                            <ol class="list-group text-center">
+                                <% it.queueDict[day].forEach(function(person) { %>
+                                <li class="list-group-item list-group-item-action"><%= person %></li>
+                                <% }) %>
+                            </ol>
+                            <% } %>
+                        </div>
+                        <% }) %>
+                    </div>
+                </div>
             </div>
-            <% }) %>
+            <div class="tab-pane fade" id="table" role="tabpanel">
+                <% var maxDepth = 1 %>
+                <div class="container-fluid table-responsive my-2 mx-1">
+                    <table class="table table-striped">
+                        <thead class="thead-dark">
+                            <tr>
+                                <th scope="col">#</th>
+                                <% Object.keys(it.queueDict).forEach(function(day) { %>
+                                <th scope="col" class="text-capitalize text-center"><%= day %></th>
+                                <% if(it.queueDict[day].length > maxDepth){ maxDepth = it.queueDict[day].length } %>
+                                <% }) %>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        <% for(var i=0; i < maxDepth; i++){ %>
+                            <tr>
+                            <th scope="row" class="align-middle"><%= i+1 %></th>
+                            <% Object.keys(it.queueDict).forEach(function(day) { %>
+                                <% if(it.queueDict[day].length > i) { %>
+                                    <td class="text-center"><%= it.queueDict[day][i] %></td>
+                                <% } else { %>
+                                    <td class="text-center">Available</td>
+                                <% } %>
+                            <% }) %>
+                            </tr>
+                        <% } %>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
         </div>
         <!-- Code by w3codegenerator.com -->
-        <form class="generated-form"  method="POST" action="/manualqueue" enctype="application/json" target="_self">
-        <fieldset>
-           <legend>Add yourself to the queue:</legend>
-           <label for="name">Name:</label><br>
-           <input type="text" id="name" name="name"><br>
-           <input type="checkbox" id="sunday" name="days" value="sunday">
-           <label for="sunday"> Sunday</label><br>
-           <input type="checkbox" id="monday" name="days" value="monday">
-           <label for="monday"> Monday</label><br>
-           <input type="checkbox" id="tuesday" name="days" value="tuesday">
-           <label for="tuesday"> Tuesday</label><br>
-           <input type="checkbox" id="wednesday" name="days" value="wednesday">
-           <label for="wednesday"> Wednesday</label><br>
-           <input type="checkbox" id="thursday" name="days" value="thursday">
-           <label for="thursday"> Thursday</label><br>
-           <input type="checkbox" id="friday" name="days" value="friday">
-           <label for="friday"> Friday</label><br>
-           <input type="checkbox" id="saturday" name="days" value="saturday">
-           <label for="saturday"> Saturday</label><br>
-           <input type="submit" value="Queue Me!"><br><br>
-        </fieldset>
-        </form>
+        <div class="accordion" id="accordion">
+        <div style="max-width: 500px;" class="card mx-auto mt-2 w-50 text-center">
+            <div class="card-header" id="collapse-header">
+                <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapse" aria-expanded="false" aria-controls="collapse">
+                <h4>Add yourself to the queue:</h4>
+                </button>
+            </div>
+            <div id="collapse" class="collapse" aria-labelledby="collapse-header" data-parent="#accordion">
+            <div class="card-body pb-0">
+                <form class="form-group"  method="POST" action="/manualqueue" enctype="application/json" target="_self">
+                <fieldset class="form-group mx-auto">
+                   <label for="name" class="card-text">Name:</label><br>
+                   <input type="text" id="name" name="name" class="mb-3"><br>
+                   <label for="day-selector" class="card-text">Desired days:</label>
+                       <select multiple style="overflow-y: auto;" class="form-control h-100 mb-3 mx-auto w-50 text-center" size="7" id="day-selector" name="days">
+                         <option value="sunday">Sunday</option>
+                         <option value="monday">Monday</option>
+                         <option value="tuesday">Tuesday</option>
+                         <option value="wednesday">Wednesday</option>
+                         <option value="thursday">Thursday</option>
+                         <option value="friday">Friday</option>
+                         <option value="saturday">Saturday</option>
+                       </select>
+                   <input class="btn btn-outline-success btn-block" type="submit" value="Queue Me!"><br><br>
+                </fieldset>
+                </form>
+            </div>
+            </div>
+        </div>
+        </div>
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
     </body>
 </html>
