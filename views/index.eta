@@ -12,8 +12,8 @@
         </ul>
         </div>
         <div class="tab-content card-body jumbotron p-0 m-0">
-            <div class="tab-pane active" id="modern" role="tabpanel">
-                <div class="container-fluid my-5">
+            <div class="tab-pane fade active show" id="modern" role="tabpanel">
+                <div class="container-fluid my-2">
                     <div class="row">
                         <% Object.keys(it.queueDict).forEach(function(day) { %>
                         <div class="col-lg py-3">
@@ -32,9 +32,9 @@
                     </div>
                 </div>
             </div>
-            <div class="tab-pane" id="table" role="tabpanel">
+            <div class="tab-pane fade" id="table" role="tabpanel">
                 <% var maxDepth = 1 %>
-                <div class="container-fluid table-responsive my-5 mx-1">
+                <div class="container-fluid table-responsive my-2 mx-1">
                     <table class="table table-striped">
                         <thead class="thead-dark">
                             <tr>
@@ -65,8 +65,14 @@
         </div>
         </div>
         <!-- Code by w3codegenerator.com -->
+        <div class="accordion" id="accordion">
         <div style="max-width: 500px;" class="card mx-auto mt-2 w-50 text-center">
-            <h4 class="card-header">Add yourself to the queue:</h4>
+            <div class="card-header" id="collapse-header">
+                <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapse" aria-expanded="false" aria-controls="collapse">
+                <h4>Add yourself to the queue:</h4>
+                </button>
+            </div>
+            <div id="collapse" class="collapse" aria-labelledby="collapse-header" data-parent="#accordion">
             <div class="card-body pb-0">
                 <form class="form-group"  method="POST" action="/manualqueue" enctype="application/json" target="_self">
                 <fieldset class="form-group mx-auto">
@@ -86,6 +92,8 @@
                 </fieldset>
                 </form>
             </div>
+            </div>
+        </div>
         </div>
         <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
