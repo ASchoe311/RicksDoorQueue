@@ -4,11 +4,14 @@
         <title>Door Queue</title>
     </head>
     <body>
-        <ul class="nav nav-tabs">
-            <li class="nav-item"><a class="nav-link list-group-item list-group-item-action active" data-toggle="list" href="#modern" role="tab">"Modern" View</a></li>
-            <li class="nav-item"><a class="nav-link list-group-item list-group-item-action" data-toggle="list" href="#table" role="tab">Table View</a></li>
+        <div class="card px-3 w-100">
+        <div class="card-header bg-dark">
+        <ul class="nav nav-pills card-header-pills">
+            <li class="nav-item"><a class="nav-link active" data-toggle="list" href="#modern" role="tab">"Modern" View</a></li>
+            <li class="nav-item"><a class="nav-link" data-toggle="list" href="#table" role="tab">Table View</a></li>
         </ul>
-        <div class="tab-content">
+        </div>
+        <div class="tab-content card-body jumbotron p-0 m-0">
             <div class="tab-pane active" id="modern" role="tabpanel">
                 <div class="container-fluid my-5">
                     <div class="row">
@@ -60,16 +63,17 @@
                 </div>
             </div>
         </div>
+        </div>
         <!-- Code by w3codegenerator.com -->
-        <div class="card mx-5 text-center">
+        <div style="max-width: 500px;" class="card mx-auto mt-2 w-50 text-center">
             <h4 class="card-header">Add yourself to the queue:</h4>
-            <div class="card-body">
-                <form class="form-inline"  method="POST" action="/manualqueue" enctype="application/json" target="_self">
+            <div class="card-body pb-0">
+                <form class="form-group"  method="POST" action="/manualqueue" enctype="application/json" target="_self">
                 <fieldset class="form-group mx-auto">
-                   <label for="name" class="mr-2 card-text">Name:</label><br>
-                   <input type="text" id="name" name="name" class="mr-5"><br>
-                   <label for="day-selector" class="mr-2 card-text">Select desired days:</label>
-                       <select multiple class="form-control mr-5" id="day-selector" name="days">
+                   <label for="name" class="card-text">Name:</label><br>
+                   <input type="text" id="name" name="name" class="mb-3"><br>
+                   <label for="day-selector" class="card-text">Desired days:</label>
+                       <select multiple style="overflow-y: auto;" class="form-control h-100 mb-3 mx-auto w-50 text-center" size="7" id="day-selector" name="days">
                          <option value="sunday">Sunday</option>
                          <option value="monday">Monday</option>
                          <option value="tuesday">Tuesday</option>
@@ -78,7 +82,7 @@
                          <option value="friday">Friday</option>
                          <option value="saturday">Saturday</option>
                        </select>
-                   <input type="submit" value="Queue Me!"><br><br>
+                   <input class="btn btn-outline-success btn-block" type="submit" value="Queue Me!"><br><br>
                 </fieldset>
                 </form>
             </div>
