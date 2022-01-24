@@ -36,11 +36,11 @@ cron.schedule("0 5 * * SUN", () => {
   bot.clearQueue();
 });
 
-cron.schedule("*/15 * * * *", () => {
-  console.log("Staying alive!")
-});
+// cron.schedule("*/15 * * * *", () => {
+//   console.log("Staying alive!")
+// });
 
-port = Number(process.env.PORT || 8080);
+port = Number(process.env.PORT || 80);
 server.listen(port);
 
 async function renderTable() {
