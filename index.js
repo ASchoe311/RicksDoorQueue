@@ -30,13 +30,13 @@ server = http.createServer(function (req, res) {
 
 // bot.addfakes()
 
-cron.schedule("0 0 * * SUN", () => {
+cron.schedule("0 5 * * SUN", () => {
   // bot.check();
   console.log("Clearing the queue!")
   bot.clearQueue();
 });
 
-cron.schedule("*/5 * * * *", () => {
+cron.schedule("*/15 * * * *", () => {
   console.log("Staying alive!")
 });
 
