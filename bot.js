@@ -2,8 +2,8 @@ var HTTPS = require('https');
 const { Module } = require('module');
 
 var querystring = require("querystring")
-// botID="3964152c789e251f4a7d5c864b"
-botID = "bee00e962e7dd0d8fbc79f9f03"
+// const botID = "3964152c789e251f4a7d5c864b"
+const botID = "bee00e962e7dd0d8fbc79f9f03"
 
 var queueDict = {
   "sunday": [],
@@ -23,44 +23,62 @@ function clearQueue() {
 }
 
 function addToQueue() {
-  var formData = querystring.parse(this.req.chunks[0]);
-  if(formData['name'] == "" || !("days" in formData)) { return }
+  var formData = new URLSearchParams(this.req.chunks[0]);
+  if(formData.get('name') == "" || !(formData.has("days"))) { return }
   console.log("Manual queue request received")
   console.log(formData)
-  if(typeof(formData['days']) == "string"){
-    if(queueDict[formData['days']].indexOf(formData['name']) == -1){
-      queueDict[formData['days']].push(formData['name'])
+  days = formData.getAll('days')
+  // console.log(days)
+  if(days.length == 1){
+    if(queueDict[days[0]].indexOf(formData.get('name')) == -1){
+      queueDict[days[0]].push(formData.get('name'))
     }
     return;
   }
   else{
-    for(let i=0; i<formData['days'].length; i++){
-      if(queueDict[formData['days'][i]].indexOf(formData['name']) == -1){
-        queueDict[formData['days'][i]].push(formData['name'])
+    for(let i=0; i<days.length; i++){
+      if(queueDict[days[i]].indexOf(formData.get('name')) == -1){
+        queueDict[days[i]].push(formData.get('name'))
       }
     }
   }
 }
 
 function respond() {
+  // console.log(typeof(this.req.chunks[0]))
+  if (this.req.chunks[0].indexOf("0x%5B%5D") != -1){
+    console.log("Caught laravel attack query, ignoring")
+    this.res.writeHead(400)
+    this.res.end()
+    return;
+  }
   try {
     var request = JSON.parse(this.req.chunks[0])
   } catch (error){
-    console.error("Error while parsing JSON for: ")
-    console.error(this.req.chunks[0])
+    // console.error(error)
+    console.error(error.constructor.name + " while parsing JSON for: " + this.req.chunks[0])
+    // console.error(this.req.chunks[0])
     this.res.writeHead(400)
+    this.res.end()
+    return;
+  }
+  if (request.sender_type == "bot"){
+    console.log("Bot message received, nothing to do")
+    this.res.writeHead(200)
     this.res.end()
     return;
   }
   console.log(request)
   var responseText = ""
   if (request.text) {
-    var msgArr = request.text.toLowerCase().split(" ")
+    // WTF javascript
+    var msgArr = request.text.toLowerCase().replace(/^\s+|\s+$/gm, '').split(" ")
+    console.log("Parsed message: " + msgArr)
     if(msgArr[0] == "/unqueue"){
       if(msgArr.length == 1){
         responseText = "ERROR - /unqueue: No day specified"
       }
-      else if(!(msgArr[1] in queueDict)){
+      else if(!(queueDict.hasOwnProperty(msgArr[1]))){
         responseText = "ERROR - /unqueue: Invalid day given -> " + msgArr[1]
       }
       else{
@@ -88,8 +106,8 @@ function respond() {
           msgArr = ["/queuecheck", "sunday", "monday", "tuesday", "wednesday", "thursday", "friday", "saturday"];
         }
         for(var i=1; i<msgArr.length; i++){
-          if(!(msgArr[i] in queueDict)){
-            responseText = "ERROR - /queuecheck: Invalid day given - " + msgArr[i]
+          if(!(queueDict.hasOwnProperty(msgArr[i]))){
+            responseText = "ERROR - /queuecheck: Invalid day given -> " + msgArr[i]
             break
           }
           if(queueDict[msgArr[i]].length == 0){
@@ -109,20 +127,24 @@ function respond() {
           responseText += "\n"
         }
       }
-      console.log(responseText)
+      // console.log(responseText)
       this.res.writeHead(200);
       postMessage(responseText);
       this.res.end();
     }
     else if(msgArr[0] == "/queue"){
       var queued = 0
+      let error = false;
+      // console.log(msgArr.length)
       if(msgArr.length == 1){
         responseText = "ERROR - /queue: No day(s) specified"
+        error = true
       }
       else{
-        let error = false;
+        // console.log(msgArr.length)
         for(var i=1;i < msgArr.length;i++){
-          if(!(msgArr[i] in queueDict)){
+          // console.log(msgArr[i])
+          if(!(queueDict.hasOwnProperty(msgArr[i]))){
             responseText = "ERROR - /queue: Invalid day given -> " + msgArr[i]
             error = true
             break;
@@ -148,7 +170,8 @@ function respond() {
         }
       }
       this.res.writeHead(201);
-      if(queued > 0){ postMessage(responseText); }
+      if(queued > 0 || error){ postMessage(responseText); }
+      else { postMessage("Already queued, nothing to do"); }
       this.res.end();
     }
     else if(msgArr[0] == "/queuesite"){
@@ -176,7 +199,6 @@ function respond() {
     }
   }
 }
-
 function postMessage(msg) {
   var botResponse, options, body, botReq;
 
