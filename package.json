@@ -1,14 +1,14 @@
 {
   "name": "ricks-door-queue",
-  "version": "0.1.2",
+  "version": "1.0.0",
   "description": "Queue manager",
   "main": "index.js",
   "scripts": {
     "start": "node index.js"
   },
   "engines": {
-    "node": "12.21.0",
-    "npm": "6.14.11"
+    "node": "14.18.2",
+    "npm": "6.14.15"
   },
   "repository": {
     "type": "git",
@@ -16,8 +16,8 @@
   },
   "keywords": [
     "node",
-    "heroku",
-    "express"
+    "aws",
+    "director"
   ],
   "license": "MIT",
   "dependencies": {

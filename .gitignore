@@ -1,4 +1,8 @@
 node_modules/
 run.bat
 test.py
-package_lock.json
+package-lock.json
+csr.pem
+privatekey.pem
+public.crt
+.ebextensions/*
