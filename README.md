@@ -7,21 +7,27 @@ Rick's employees often need to have coworkers take their shifts as a result of o
 ## Usage
 
 /queue {day1} {day2} {day3} ...
-: Adds the message sender to the queue for each of the specified days
+
+  Adds the message sender to the queue for each of the specified days
 
 /unqueue {day1} {day2} {day3} ...
-: Removes the message sender from the queue for each of the specified days
+
+  Removes the message sender from the queue for each of the specified days
 
 /queuecheck {day1} {day2} {day3} ...
-: Posts a message in chat with the status of the queues for any given days
+
+  Posts a message in chat with the status of the queues for any given days
 
 /queuecheck all
-: Posts a message in chat with the status of the queues for all days
+  
+  Posts a message in chat with the status of the queues for all days
 
 /queuesite
-: Posts a message in chat with the link to a web frontend for the queues where they can be viewed and interacted with
+
+ Posts a message in chat with the link to a web frontend for the queues where they can be viewed and interacted with
 
 /queuehelp
-: Posts a message in the chat providing information on how to use QueueBot
+
+  Posts a message in the chat providing information on how to use QueueBot
 
 ## This bot is no longer in use, but here are some screenshots of it functioning
