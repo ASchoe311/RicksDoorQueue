@@ -31,3 +31,7 @@ Rick's employees often need to have coworkers take their shifts as a result of o
   Posts a message in the chat providing information on how to use QueueBot
 
 ## This bot is no longer in use, but here are some screenshots of it functioning
+![Chat bot](https://i.imgur.com/UXCikvz.png)
+![Empty Queue](https://i.imgur.com/HhoAuX7.png)
+!["Modern" Queue Style](https://i.imgur.com/bjq68Pi.png)
+!["Table" Queue Style](https://i.imgur.com/ayTzHJx.png)
